@@ -8,8 +8,9 @@ import { RootState } from 'app/reducers';
 import { TodoModel } from 'app/models';
 import { omit } from 'app/utils';
 import { Header, TodoList, Footer } from 'app/components';
+import { Modal } from 'antd'
 
-const FILTER_VALUES = (Object.keys(TodoModel.Filter) as (keyof typeof TodoModel.Filter)[]).map(
+const FILTER_VALUES = (Object.keys(TodoModel.Filter) as Array<keyof typeof TodoModel.Filter>).map(
   (key) => TodoModel.Filter[key]
 );
 
@@ -38,9 +39,10 @@ export namespace App {
   })
 )
 export class App extends React.Component<App.Props> {
-  static defaultProps: Partial<App.Props> = {
+  public static defaultProps: Partial<App.Props> = {
     filter: TodoModel.Filter.SHOW_ALL
   };
+
 
   constructor(props: App.Props, context?: any) {
     super(props, context);
@@ -48,14 +50,34 @@ export class App extends React.Component<App.Props> {
     this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
-  handleClearCompleted(): void {
+  public componentDidMount() {
+    this.confirmModal()
+  }
+
+  public confirmModal = () => {
+    Modal.info(
+
+      {
+        title: 'This is a notification message',
+        content: (
+          <div>
+            <p>some messages...some messages...</p>
+            <p>some messages...some messages...</p>
+          </div>
+        ),
+        onOk() { },
+      }
+    )
+  }
+
+  public handleClearCompleted(): void {
     const hasCompletedTodo = this.props.todos.some((todo) => todo.completed || false);
     if (hasCompletedTodo) {
       this.props.actions.clearCompleted();
     }
   }
 
-  handleFilterChange(filter: TodoModel.Filter): void {
+  public handleFilterChange(filter: TodoModel.Filter): void {
     this.props.history.push(`#${filter}`);
   }
 
