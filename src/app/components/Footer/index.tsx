@@ -20,12 +20,12 @@ export namespace Footer {
 }
 
 export class Footer extends React.Component<Footer.Props> {
-  static defaultProps: Partial<Footer.Props> = {
+  public static defaultProps: Partial<Footer.Props> = {
     activeCount: 0,
     completedCount: 0
   };
 
-  renderTodoCount(): JSX.Element {
+  public renderTodoCount(): JSX.Element {
     const { activeCount } = this.props;
     const itemWord = activeCount === 1 ? 'item' : 'items';
 
@@ -36,7 +36,7 @@ export class Footer extends React.Component<Footer.Props> {
     );
   }
 
-  renderFilterLink(filter: TodoModel.Filter): JSX.Element {
+  public renderFilterLink(filter: TodoModel.Filter): JSX.Element {
     const { filter: selectedFilter, onClickFilter } = this.props;
 
     return (
@@ -49,7 +49,7 @@ export class Footer extends React.Component<Footer.Props> {
     );
   }
 
-  renderClearButton(): JSX.Element | void {
+  public renderClearButton(): JSX.Element | void {
     const { completedCount, onClickClearCompleted } = this.props;
     if (completedCount! > 0) {
       return (
@@ -62,12 +62,12 @@ export class Footer extends React.Component<Footer.Props> {
     }
   }
 
-  render() {
+  public render() {
     return (
       <footer className={style.normal}>
         {this.renderTodoCount()}
         <ul className={style.filters}>
-          {(Object.keys(TodoModel.Filter) as (keyof typeof TodoModel.Filter)[]).map((key) => (
+          {(Object.keys(TodoModel.Filter) as Array<keyof typeof TodoModel.Filter>).map((key) => (
             <li key={key} children={this.renderFilterLink(TodoModel.Filter[key])} />
           ))}
         </ul>

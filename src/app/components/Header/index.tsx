@@ -14,17 +14,17 @@ export class Header extends React.Component<Header.Props> {
     this.handleSave = this.handleSave.bind(this);
   }
 
-  handleSave(text: string) {
+  public handleSave(text: string) {
     if (text.length) {
       this.props.addTodo({ text });
     }
   }
 
-  render() {
+  public render() {
     return (
       <header>
         <h1>Todos</h1>
-        <TodoTextInput newTodo onSave={this.handleSave} placeholder="What needs to be done?" />
+        <TodoTextInput newTodo={true} onSave={this.handleSave} placeholder="What needs to be done?" />
       </header>
     );
   }
