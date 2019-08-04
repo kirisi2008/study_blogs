@@ -1,7 +1,7 @@
 
 import React from 'react';
 import GoldenLayout from 'golden-layout';
-import { App as TodoList } from '../TodoApp';
+import { App as TodoList } from '../';
 import { wrapComponent } from 'app/components/parts/WrappedComponent';
 
 class GoldenLayoutWrapper extends React.Component {
