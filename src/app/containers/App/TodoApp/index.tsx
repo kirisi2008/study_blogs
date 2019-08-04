@@ -81,7 +81,7 @@ export class App extends React.Component<App.Props> {
     this.props.history.push(`#${filter}`);
   }
 
-  render() {
+  public render() {
     const { todos, actions, filter } = this.props;
     const activeCount = todos.length - todos.filter((todo) => todo.completed).length;
     const filteredTodos = filter ? todos.filter(FILTER_FUNCTIONS[filter]) : todos;
